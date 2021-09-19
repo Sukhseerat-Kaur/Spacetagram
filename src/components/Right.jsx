@@ -7,104 +7,109 @@ import { useState, useEffect } from "react";
 import Card from "./Card";
 import Loader from "./Loader";
 import { ReactComponent as Logo } from "./logo.svg";
+import { fetchPosts } from "../api/fetchPosts";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
+const getDefaultDate = () => {
+  return {
+    start: new DateObject()
+      .subtract(14, "days")
+      .toLocaleString()
+      .replaceAll("/", "-"),
+    end: new DateObject().toLocaleString().replaceAll("/", "-"),
+  };
+};
 const Right = () => {
-  let defaultDate = new Date();
-  defaultDate.setDate(defaultDate.getDate() - 14);
-  defaultDate = defaultDate.toISOString().slice(0, 10);
-
-  const [start, setStart] = useState(new DateObject().subtract(14, "days"));
-  const [end, setEnd] = useState(new DateObject());
-
+  const [inputDate, setInputDate] = useState(getDefaultDate());
+  const [searchDate, setSearchDate] = useState(getDefaultDate());
   const [posts, setPosts] = useState([]);
   const [isLoading, setLoading] = useState(false);
+  const [localPosts, setLocalPosts] = useLocalStorage("likedPosts", []);
 
   useEffect(() => {
-    fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=KzfuoUrxMV1JRATqlA16k2n6dMzXMtqobNMfwc4h&start_date=${defaultDate}&thumbs=True`
-    )
-      .then((res) => res.json())
-      .then((data) => setPosts(data));
-  }, []);
+    const getPosts = async () => {
+      setLoading(true);
+      let res = await fetchPosts(searchDate);
+      if (localPosts.length) {
+        res = res.map((post) => {
+          const postData = localPosts.find(
+            (lPost) => lPost.title === post.title
+          );
+          return postData ? postData : post;
+        });
+      }
+      setPosts(res);
+      setLoading(false);
+    };
 
-  const handleClick = () => {
-    setLoading(true);
-    fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=KzfuoUrxMV1JRATqlA16k2n6dMzXMtqobNMfwc4h&start_date=${start.format()}&end_date=${end.format()}&thumbs=True`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data);
-        setLoading(false);
-      });
+    getPosts();
+  }, [searchDate]);
+
+  const toggleLiked = (postData, index) => {
+    const newPostsData = posts.map((val, idx) =>
+      idx === index ? { ...val, liked: !val.liked } : val
+    );
+
+    const inLocal = localPosts.find((lpost) => postData.title === lpost.title);
+    if (inLocal) {
+      const newLocal = localPosts.filter((val) => val.title !== inLocal.title);
+      setLocalPosts(newLocal);
+    } else {
+      setLocalPosts((s) => [...s, { ...postData, liked: !postData.liked }]);
+    }
+    setPosts(newPostsData);
   };
 
-  if (posts.length === 0) return <Loader />;
-
-  posts.map((postObj) => {
-    const arr = JSON.parse(localStorage.getItem("likedPosts"));
-    let found = false;
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i].title === postObj.title) {
-        postObj["liked"] = true;
-        found = true;
-        break;
-      }
-    }
-    if (!found) postObj["liked"] = false;
-  });
+  if (posts.length === 0 || isLoading) return <Loader />;
 
   return (
     <div className="right">
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <div className="logo-and-name">
-            <div className="logo">
-              <Logo />
-            </div>
-            <span className="app-name">Spacetagram</span>
-          </div>
+      <div className="logo-and-name">
+        <div className="logo">
+          <Logo />
+        </div>
+        <span className="app-name">Spacetagram</span>
+      </div>
 
-          <div className="main">
-            <div className="inputs">
-              <DatePicker
-                placeholder="Start Date"
-                value={start}
-                onChange={setStart}
-                format="YYYY-MM-DD"
-                maxDate={new DateObject()}
-                animations={[
-                  opacity(),
-                  transition({ from: 35, duration: 600 }),
-                ]}
-                render={<CustomInput />}
-                className="purple datepicker"
-              />
-              <DatePicker
-                placeholder="End Date"
-                value={end}
-                onChange={setEnd}
-                format="YYYY-MM-DD"
-                maxDate={new DateObject()}
-                animations={[
-                  opacity(),
-                  transition({ from: 35, duration: 600 }),
-                ]}
-                render={<CustomInput />}
-                className="purple datepicker"
-              />
-              <button onClick={handleClick}>Go</button>
-            </div>
-            <div className="posts">
-              {posts.map((obj) => (
-                <Card postData={obj} />
-              ))}
-            </div>
-          </div>
-        </>
-      )}
+      <div className="main">
+        <div className="inputs">
+          <DatePicker
+            placeholder="Start Date"
+            value={inputDate.start}
+            onChange={(date) =>
+              setInputDate((s) => ({ ...s, start: date.toLocaleString() }))
+            }
+            format="YYYY-MM-DD"
+            maxDate={new DateObject()}
+            animations={[opacity(), transition({ from: 35, duration: 600 })]}
+            render={<CustomInput />}
+            className="purple datepicker"
+          />
+          <DatePicker
+            placeholder="End Date"
+            value={inputDate.end}
+            onChange={(date) =>
+              setInputDate((s) => ({ ...s, end: date.toLocaleString() }))
+            }
+            format="YYYY-MM-DD"
+            maxDate={new DateObject()}
+            animations={[opacity(), transition({ from: 35, duration: 600 })]}
+            render={<CustomInput />}
+            className="purple datepicker"
+          />
+          <button onClick={() => setSearchDate(inputDate)}>Go</button>
+        </div>
+        <div className="posts">
+          {posts.map((obj, index) => (
+            <Card
+              key={index}
+              postData={obj}
+              toggleLiked={toggleLiked}
+              index={index}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
