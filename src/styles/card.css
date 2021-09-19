@@ -1,0 +1,174 @@
+.card {
+  background-color: white;
+  color: #272727;
+  padding: 1.5rem;
+  border-radius: 30px;
+  transition: 200ms;
+  width: 32rem;
+  box-shadow: 0 5px 10px rgba(119, 124, 143, 0.05),
+    0 15px 40px rgba(131, 137, 158, 0.2);
+}
+
+/* .card-header {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+} */
+.card .header,
+.card .description {
+  margin: 0 0.5rem;
+  /* border: 1px solid black; */
+}
+.card .header .title {
+  font-weight: 600;
+  font-size: 28px;
+}
+
+.card .header .date {
+  font-size: 16px;
+  color: #d500f9;
+}
+.card .card-img {
+  width: 100%;
+}
+.card .media {
+  border-radius: 25px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  width: 100%;
+  height: 25rem;
+}
+.card .explanation {
+  font-weight: 400;
+  font-size: 14px;
+  width: 100%;
+}
+.card .explanation.show-less {
+  /* font-weight: 400;
+  font-size: 16px; */
+  height: 9.8rem;
+  overflow: hidden;
+}
+
+/* .card .explanation {
+  height: max-content;
+} */
+
+.read-more {
+  cursor: pointer;
+  font-size: 14px;
+  color: #d500f9;
+}
+
+/* .like {
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+  background: url("https://cssanimation.rocks/images/posts/steps/heart.png")
+    no-repeat;
+  background-position: 0 0;
+  cursor: pointer;
+  transition: background-position 1s steps(28);
+  transition-duration: 0s;
+}
+
+.like.liked {
+  transition-duration: 1s;
+  background-position: -2800px 0;
+} */
+
+.like-button {
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.like-overlay {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #fa2246;
+  transform: scale(0);
+  transition: all 0.4s;
+  z-index: 0;
+}
+
+.not-active .not-liked {
+  display: block;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+.not-active .is-liked {
+  display: none;
+}
+
+.is-active .like-overlay {
+  transform: scale(1);
+}
+
+.is-active .not-liked {
+  display: none;
+}
+
+.is-active .is-liked {
+  display: block;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+@-webkit-keyframes bouncy {
+  from,
+  to {
+    -webkit-transform: scale(1, 1);
+  }
+  25% {
+    -webkit-transform: scale(0.9, 1.1);
+  }
+  50% {
+    -webkit-transform: scale(1.1, 0.9);
+  }
+  75% {
+    -webkit-transform: scale(0.95, 1.05);
+  }
+}
+@keyframes bouncy {
+  from,
+  to {
+    transform: scale(1, 1);
+  }
+  25% {
+    transform: scale(0.9, 1.1);
+  }
+  50% {
+    transform: scale(1.1, 0.9);
+  }
+  75% {
+    transform: scale(0.95, 1.05);
+  }
+}
+
+.bouncy {
+  -webkit-animation: bouncy 0.6s;
+  animation: bouncy 0.6s;
+  -webkit-animation-duration: 0.6s;
+  animation-duration: 0.6s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}

@@ -1,0 +1,85 @@
+.loader {
+  align-items: center;
+  background: #171f2b;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  min-width: 100vw;
+  background: #f8f7f7;
+}
+.loader-container {
+  height: 200px;
+  /* Main container */
+  position: relative;
+  width: 200px;
+}
+.loader-container span {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  /* The value declared in the tag is used */
+  transform: rotate(calc(18deg * var(--i)));
+  width: 100%;
+}
+
+.loader-container span::before {
+  animation: 2s linear infinite smoke;
+  /* The value declared in the tag is used */
+  animation-delay: calc(0.1s * var(--i));
+  background: #e02946;
+  border-radius: 50%;
+  /* Mandatory */
+  content: "";
+  left: 0;
+  position: absolute;
+  height: 32px;
+  top: 0;
+  /* Smoke's initial state */
+  transform: scale(0);
+  width: 32px;
+}
+
+.loader-container div {
+  animation: 2s linear infinite rocket;
+  color: white;
+  font-size: 96px;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.loader-container i {
+  left: 0;
+  position: absolute;
+  top: -64px;
+  color: #d500f9;
+}
+
+/* ANIMATION SECTION */
+@keyframes smoke {
+  0% {
+    transform: scale(0);
+  }
+
+  10% {
+    transform: scale(1);
+  }
+
+  80%,
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes rocket {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(1turn);
+  }
+}
