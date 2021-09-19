@@ -16,7 +16,10 @@ const getDefaultDate = () => {
       .subtract(14, "days")
       .toLocaleString()
       .replaceAll("/", "-"),
-    end: new DateObject().toLocaleString().replaceAll("/", "-"),
+    end: new DateObject()
+      .subtract(1, "days")
+      .toLocaleString()
+      .replaceAll("/", "-"),
   };
 };
 const Right = () => {
