@@ -43,6 +43,7 @@ const Right = () => {
     };
 
     getPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchDate]);
 
   const toggleLiked = (postData, index) => {

@@ -16,7 +16,12 @@ const Card = ({ postData, toggleLiked, index }) => {
         {postData.media_type === "image" ? (
           <img src={postData.url} alt={postData.title} className="media" />
         ) : (
-          <iframe src={postData.url} frameBorder="0" className="media"></iframe>
+          <iframe
+            src={postData.url}
+            frameBorder="0"
+            className="media"
+            title={postData.title}
+          ></iframe>
         )}
       </div>
       <div className="description">
