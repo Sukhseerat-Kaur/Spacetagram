@@ -38,7 +38,6 @@
 
 .right {
   width: 100%;
-
   display: flex;
   /* flex-direction: column; */
   /* align-items: center; */
@@ -52,20 +51,23 @@
   flex-direction: column;
   gap: 1.5rem;
   padding: 1.5rem;
+  width: 80%;
 }
 
 .right .posts {
   display: flex;
   height: max-content;
-  width: 40rem;
-  align-items: center;
-  flex-direction: column;
+  justify-content: center;
+  flex-direction: row;
   gap: 1.5rem;
+  /* border: 1px solid black; */
+  flex-wrap: wrap;
 }
 
 .inputs {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .navbar {
@@ -139,3 +141,42 @@ button:active {
   box-shadow: 0px 4px 8px rgba(darken(dodgerblue, 30%));
   transform: scale(0.98);
 }
+
+@media screen and (max-device-width: 502px) {
+  .logo-and-name {
+    display: none;
+  }
+
+  input {
+    width: 7rem;
+    height: 2rem;
+    font-size: normal;
+  }
+  .inputs {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+}
+
+@media screen and (max-device-width: 585px) {
+  input {
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (max-device-width: 900px) {
+  .logo-and-name .app-name {
+    display: none;
+  }
+}
+
+/* @media screen and (max-device-width: 585px) {
+  .logo-and-name {
+    display: none;
+  }
+
+  input {
+    margin-bottom: 1rem;
+  }
+} */

@@ -172,3 +172,40 @@
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
+
+@media (max-width: 1370px) {
+  .card {
+    width: 25rem;
+  }
+
+  .card .media {
+    height: 18rem;
+  }
+}
+
+@media screen and (max-device-width: 502px) {
+  .card .header .title {
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  .card .media {
+    height: 13rem;
+  }
+
+  .like-button,
+  .like-overlay {
+    width: 40px;
+    height: 40px;
+  }
+
+  .card .explanation {
+    font-size: 10px;
+  }
+
+  /* .not-liked,
+  .is-liked {
+    width: 20px;
+    height: 20px;
+  } */
+}
