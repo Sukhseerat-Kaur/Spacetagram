@@ -9,6 +9,8 @@ import Loader from "./Loader";
 import { ReactComponent as Logo } from "./logo.svg";
 import { fetchPosts } from "../api/fetchPosts";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import { Link } from "react-router-dom";
 
 const getDefaultDate = () => {
   return {
@@ -102,6 +104,15 @@ const Right = () => {
             className="purple datepicker"
           />
           <button onClick={() => setSearchDate(inputDate)}>Go</button>
+
+          <Link to="/liked" className="icon">
+            <FavoriteIcon
+              style={{
+                color: "#fa2246",
+                fontSize: "2.2rem",
+              }}
+            />
+          </Link>
         </div>
         <div className="posts">
           {posts.map((obj, index) => (
