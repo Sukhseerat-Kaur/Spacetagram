@@ -47,7 +47,9 @@ const Right = () => {
       setLoading(false);
     };
 
-    getPosts();
+    if (searchDate.start > searchDate.end)
+      alert("End date cannot be less than start date");
+    else getPosts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchDate]);
 
