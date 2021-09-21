@@ -13,4 +13,4 @@
 
 - There is also a **dedicated page for the liked image posts**, where the user can view all the images that liked.
 
-![](./public/spacetagram-image-2.png)
+![](./public/spacetagram-readme--image-2.png)

@@ -202,10 +202,10 @@
   .card .explanation {
     font-size: 12px;
   }
+}
 
-  /* .not-liked,
-  .is-liked {
-    width: 20px;
-    height: 20px;
-  } */
+@media screen and (max-device-width: 1089px) {
+  .card {
+    width: 40rem;
+  }
 }
