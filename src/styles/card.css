@@ -173,9 +173,9 @@
   animation-fill-mode: both;
 }
 
-@media (max-width: 1370px) {
+@media screen and (max-device-width: 1370px) {
   .card {
-    width: 25rem;
+    width: 30rem;
   }
 
   .card .media {
@@ -201,11 +201,5 @@
 
   .card .explanation {
     font-size: 12px;
-  }
-}
-
-@media screen and (max-device-width: 1089px) {
-  .card {
-    width: 34rem;
   }
 }
