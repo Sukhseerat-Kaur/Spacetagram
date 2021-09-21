@@ -8,4 +8,8 @@
 - Each post shows the image along with the title, date and description of the image.
 - The user can like and unlikethe image post, which get saved in the local storage, hence the posts remain liked even after the user visits again.
 
-- There is also a dedicated page for the liked image posts, where the user can view all the images that liked.
+![](./public/spacetagram-image.png)
+
+- There is also a **dedicated page for the liked image posts**, where the user can view all the images that liked.
+
+![](./public/spacetagram-image-2.png)
