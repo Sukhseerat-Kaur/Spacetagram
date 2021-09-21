@@ -135,7 +135,7 @@ button:active {
   transform: scale(0.98);
 }
 
-@media screen and (max-device-width: 502px) {
+@media screen and (max-device-width: 520px) {
   .logo-and-name .app-name {
     display: none;
   }
@@ -155,13 +155,25 @@ button:active {
     align-items: center;
   }
   .icon {
-    margin-top: -40%;
+    margin-top: -25%;
+    margin-right: 8%;
   }
 }
 
 @media screen and (max-device-width: 585px) {
   input {
+    width: 7rem;
+    height: 2rem;
+    font-size: normal;
     margin-bottom: 1rem;
+  }
+
+  .right .main {
+    padding: 1.5rem 0;
+  }
+
+  .icon {
+    margin-right: 10%;
   }
 }
 
