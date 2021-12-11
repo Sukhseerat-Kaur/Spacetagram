@@ -8,28 +8,30 @@ const Card = ({ postData, toggleLiked, index }) => {
 
   return (
     <div className="card">
-      <div className="header">
-        <div className="title">{postData.title}</div>
-        <div className="date">{postData.date}</div>
-      </div>
-      <div className="card-img">
-        {postData.media_type === "image" ? (
-          <img src={postData.url} alt={postData.title} className="media" />
-        ) : (
-          <iframe
-            src={postData.url}
-            frameBorder="0"
-            className="media"
-            title={postData.title}
-          ></iframe>
-        )}
-      </div>
-      <div className="description">
-        <div className={readMore ? "explanation" : "explanation show-less"}>
-          {postData.explanation}
+      <div className="content">
+        <div className="header">
+          <div className="title">{postData.title}</div>
+          <div className="date">{postData.date}</div>
         </div>
-        <div className="read-more" onClick={() => setReadMore(!readMore)}>
-          {readMore ? "Read Less▲" : "Read More▼"}
+        <div className="card-img">
+          {postData.media_type === "image" ? (
+            <img src={postData.url} alt={postData.title} className="media" />
+          ) : (
+            <iframe
+              src={postData.url}
+              frameBorder="0"
+              className="media"
+              title={postData.title}
+            ></iframe>
+          )}
+        </div>
+        <div className="description">
+          <div className={readMore ? "explanation" : "explanation show-less"}>
+            {postData.explanation}
+          </div>
+          <div className="read-more" onClick={() => setReadMore(!readMore)}>
+            {readMore ? "Read Less▲" : "Read More▼"}
+          </div>
         </div>
       </div>
       <div
